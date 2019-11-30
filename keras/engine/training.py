@@ -1540,11 +1540,9 @@ class Model(Network):
         for stat in top_stats[:10]:
             print(stat)
         #debug
-        
+
         if reset_metrics:
             self.reset_metrics()
-
-        
 
         ret = unpack_singleton(outputs)
         return ret
