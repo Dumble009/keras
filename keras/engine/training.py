@@ -1517,6 +1517,8 @@ class Model(Network):
 
         #debug
         print("start train_function")
+        print(len(ins))
+        print(type(ins[0]))
         #debug
 
         outputs = self.train_function(ins)
