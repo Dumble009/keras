@@ -39,6 +39,7 @@ def fit_generator(model,
                   shuffle=True,
                   initial_epoch=0):
     """See docstring for `Model.fit_generator`."""
+    print("db fit gene")
     epoch = initial_epoch
 
     do_validation = bool(validation_data)
