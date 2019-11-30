@@ -2132,6 +2132,9 @@ class Function(object):
         global _LEARNING_PHASE
         assert isinstance(inputs, (list, tuple))
         feed_dict = {}
+        #debug
+        print(inputs)
+        #debug
         for tensor, value in zip(self.placeholders, inputs):
             #debug
             import tracemalloc
