@@ -2133,6 +2133,12 @@ class Function(object):
         assert isinstance(inputs, (list, tuple))
         feed_dict = {}
         for tensor, value in zip(self.placeholders, inputs):
+            #debug
+            import tracemalloc
+            tracemalloc.start()
+            snapshot1 = tracemalloc.take_snapshot()
+            #debug
+
             # cntk only support calculate on float, do auto cast here
             if (hasattr(value, 'dtype') and
                value.dtype != np.float32 and
@@ -2152,6 +2158,15 @@ class Function(object):
                         'pass inputs that have a static shape.'
                         % (str(tensor.shape), str(value.shape)))
             feed_dict[tensor] = value
+
+            #debug
+            snapshot2 = tracemalloc.take_snapshot()
+            top_stats = snapshot2.compare_to(snapshot1, 'lineno')
+
+            print("[ Top 10 differences ]")
+            for stat in top_stats[:10]:
+                print(stat)
+            #debug
 
         updated = []
         if self.trainer is not None:

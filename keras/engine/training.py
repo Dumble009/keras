@@ -1502,27 +1502,11 @@ class Model(Network):
             and/or metrics). The attribute `model.metrics_names` will give you
             the display labels for the scalar outputs.
         """
-        #debug
-        import tracemalloc
-        tracemalloc.start()
-
-        snapshot1 = tracemalloc.take_snapshot()
-        #debug
 
         x, y, sample_weights = self._standardize_user_data(
             x, y,
             sample_weight=sample_weight,
             class_weight=class_weight)
-        
-        #debug
-        snapshot2 = tracemalloc.take_snapshot()
-
-        top_stats = snapshot2.compare_to(snapshot1, 'lineno')
-
-        print("[ Top 10 differences1 ]")
-        for stat in top_stats[:10]:
-            print(stat)
-        #debug
 
         if self._uses_dynamic_learning_phase():
             ins = x + y + sample_weights + [1]
@@ -1531,25 +1515,8 @@ class Model(Network):
 
         self._make_train_function()
 
-        #debug
-        snapshot3 = tracemalloc.take_snapshot()
-        top_stats = snapshot3.compare_to(snapshot2, 'lineno')
-
-        print("[ Top 10 differences2 ]")
-        for stat in top_stats[:10]:
-            print(stat)
-        #debug
 
         outputs = self.train_function(ins)
-
-        #debug
-        snapshot4 = tracemalloc.take_snapshot()
-        top_stats = snapshot3.compare_to(snapshot2, 'lineno')
-
-        print("[ Top 10 differences2 ]")
-        for stat in top_stats[:10]:
-            print(stat)
-        #debug
 
         if reset_metrics:
             self.reset_metrics()
