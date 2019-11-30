@@ -1527,7 +1527,15 @@ class Model(Network):
 
         if reset_metrics:
             self.reset_metrics()
-        return unpack_singleton(outputs)
+            
+        snapshot3 = tracemalloc.take_snapshot()
+        top_stats = snapshot2.compare_to(snapshot1, 'lineno')
+
+        print("[ Top 10 differences ]")
+        for stat in top_stats[:10]:
+            print(stat)
+        ret = unpack_singleton(outputs)
+        return ret
 
     def test_on_batch(self, x, y, sample_weight=None, reset_metrics=True):
         """Test the model on a single batch of samples.
