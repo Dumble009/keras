@@ -19,7 +19,10 @@ from ..utils.generic_utils import to_list
 from ..utils.generic_utils import unpack_singleton
 from .. import callbacks as cbks
 
+#For Debug
+from memory_profiler import profile
 
+@profile
 def fit_generator(model,
                   generator,
                   steps_per_epoch=None,
