@@ -1515,9 +1515,15 @@ class Model(Network):
 
         self._make_train_function()
 
+        #debug
+        print("start train_function")
+        #debug
 
         outputs = self.train_function(ins)
-
+        
+        #debug
+        print("end train_function")
+        #debug
         if reset_metrics:
             self.reset_metrics()
 
