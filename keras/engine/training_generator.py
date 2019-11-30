@@ -19,10 +19,7 @@ from ..utils.generic_utils import to_list
 from ..utils.generic_utils import unpack_singleton
 from .. import callbacks as cbks
 
-#For Debug
-from memory_profiler import profile
 
-@profile
 def fit_generator(model,
                   generator,
                   steps_per_epoch=None,
@@ -39,7 +36,6 @@ def fit_generator(model,
                   shuffle=True,
                   initial_epoch=0):
     """See docstring for `Model.fit_generator`."""
-    print("db fit gene")
     epoch = initial_epoch
 
     do_validation = bool(validation_data)

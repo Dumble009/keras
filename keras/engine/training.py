@@ -1502,10 +1502,22 @@ class Model(Network):
             and/or metrics). The attribute `model.metrics_names` will give you
             the display labels for the scalar outputs.
         """
+        import tracemalloc
+        tracemalloc.start()
+
+        snapshot1 = tracemalloc.take_snapshot()
         x, y, sample_weights = self._standardize_user_data(
             x, y,
             sample_weight=sample_weight,
             class_weight=class_weight)
+        
+        snapshot2 = tracemalloc.take_snapshot()
+
+        top_stats = snapshot2.compare_to(snapshot1, 'lineno')
+
+        print("[ Top 10 differences ]")
+        for stat in top_stats[:10]:
+            print(stat)
         if self._uses_dynamic_learning_phase():
             ins = x + y + sample_weights + [1]
         else:
