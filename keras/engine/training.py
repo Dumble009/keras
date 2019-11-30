@@ -1530,11 +1530,21 @@ class Model(Network):
             ins = x + y + sample_weights
 
         self._make_train_function()
-        outputs = self.train_function(ins)
 
         #debug
         snapshot3 = tracemalloc.take_snapshot()
-        top_stats = snapshot2.compare_to(snapshot2, 'lineno')
+        top_stats = snapshot3.compare_to(snapshot2, 'lineno')
+
+        print("[ Top 10 differences2 ]")
+        for stat in top_stats[:10]:
+            print(stat)
+        #debug
+
+        outputs = self.train_function(ins)
+
+        #debug
+        snapshot4 = tracemalloc.take_snapshot()
+        top_stats = snapshot3.compare_to(snapshot2, 'lineno')
 
         print("[ Top 10 differences2 ]")
         for stat in top_stats[:10]:
