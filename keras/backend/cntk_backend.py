@@ -2246,6 +2246,9 @@ class Function(object):
 
 
 def function(inputs, outputs, updates=[], **kwargs):
+    #debug
+    print("function called!")
+    #debug
     return Function(inputs, outputs, updates=updates, **kwargs)
 
 
