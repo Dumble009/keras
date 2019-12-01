@@ -3002,6 +3002,9 @@ def print_tensor(x, message=''):
 
 
 def function(inputs, outputs, updates=None, **kwargs):
+    #debug
+    print("tensorflow function!")
+    #debug
     if _is_tf_1():
         v1_variable_initialization()
     return tf_keras_backend.function(inputs, outputs,

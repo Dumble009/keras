@@ -2128,25 +2128,11 @@ class Function(object):
         return True
 
     def __call__(self, inputs):
-        #debug
-        print("first of function");
-        #debug
         global _LEARNING_PHASE_PLACEHOLDER
-        #debug
-        print("after of LPP")
-        #debug
         global _LEARNING_PHASE
-        #debug
-        print("after of LP")
-        #debug
         assert isinstance(inputs, (list, tuple))
         feed_dict = {}
         for tensor, value in zip(self.placeholders, inputs):
-            #debug
-            import tracemalloc
-            tracemalloc.start()
-            snapshot1 = tracemalloc.take_snapshot()
-            #debug
 
             # cntk only support calculate on float, do auto cast here
             if (hasattr(value, 'dtype') and
@@ -2168,14 +2154,6 @@ class Function(object):
                         % (str(tensor.shape), str(value.shape)))
             feed_dict[tensor] = value
 
-            #debug
-            snapshot2 = tracemalloc.take_snapshot()
-            top_stats = snapshot2.compare_to(snapshot1, 'lineno')
-
-            print("[ Top 10 differences ]")
-            for stat in top_stats[:10]:
-                print(stat)
-            #debug
 
         updated = []
         if self.trainer is not None:
@@ -2246,9 +2224,6 @@ class Function(object):
 
 
 def function(inputs, outputs, updates=[], **kwargs):
-    #debug
-    print("function called!")
-    #debug
     return Function(inputs, outputs, updates=updates, **kwargs)
 
 
