@@ -302,6 +302,7 @@ class Model(Network):
         if not hasattr(self, 'train_function'):
             raise RuntimeError('You must compile your model before using it.')
         self._check_trainable_weights_consistency()
+        print(self.train_function is None)
         if self.train_function is None:
             inputs = (self._feed_inputs +
                       self._feed_targets +
