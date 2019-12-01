@@ -302,7 +302,6 @@ class Model(Network):
         if not hasattr(self, 'train_function'):
             raise RuntimeError('You must compile your model before using it.')
         self._check_trainable_weights_consistency()
-        print(self.train_function is None)
         if self.train_function is None:
             inputs = (self._feed_inputs +
                       self._feed_targets +
@@ -310,7 +309,13 @@ class Model(Network):
             if self._uses_dynamic_learning_phase():
                 inputs += [K.learning_phase()]
 
+            #debug
+            print("before K.name_scope(training)")
+            #debug
             with K.name_scope('training'):
+                #debug
+                print("after K.name_scope(training)")
+                #debug
                 with K.name_scope(self.optimizer.__class__.__name__):
                     training_updates = self.optimizer.get_updates(
                         params=self._collected_trainable_weights,
@@ -324,7 +329,9 @@ class Model(Network):
                 metrics_updates = []
                 for m in metrics:
                     metrics_updates.extend(m.updates)
-
+                #debug
+                print("before train_function")
+                #debug
                 # Gets loss and metrics. Updates weights at each call.
                 self.train_function = K.function(
                     inputs,
