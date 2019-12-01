@@ -2133,7 +2133,7 @@ class Function(object):
         assert isinstance(inputs, (list, tuple))
         feed_dict = {}
         #debug
-        print(inputs)
+        print(len(inputs))
         #debug
         for tensor, value in zip(self.placeholders, inputs):
             #debug
