@@ -1519,8 +1519,7 @@ class Model(Network):
         print("start train_function")
         print(len(ins))
         print(type(ins[0]))
-        import sys
-        print(sys.getsizeof(ins))
+        print(train_function)
         #debug
 
         outputs = self.train_function(ins)
