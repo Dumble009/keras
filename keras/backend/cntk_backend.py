@@ -2128,13 +2128,19 @@ class Function(object):
         return True
 
     def __call__(self, inputs):
+        #debug
+        print("first of function");
+        #debug
         global _LEARNING_PHASE_PLACEHOLDER
+        #debug
+        print("after of LPP")
+        #debug
         global _LEARNING_PHASE
+        #debug
+        print("after of LP")
+        #debug
         assert isinstance(inputs, (list, tuple))
         feed_dict = {}
-        #debug
-        print(len(inputs))
-        #debug
         for tensor, value in zip(self.placeholders, inputs):
             #debug
             import tracemalloc
