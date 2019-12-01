@@ -1519,7 +1519,7 @@ class Model(Network):
         print("start train_function")
         print(len(ins))
         print(type(ins[0]))
-        print(train_function)
+        print(self.train_function)
         #debug
 
         outputs = self.train_function(ins)
