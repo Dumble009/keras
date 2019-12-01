@@ -339,6 +339,9 @@ class Model(Network):
                     updates=updates + metrics_updates,
                     name='train_function',
                     **self._function_kwargs)
+                #debug
+                print(self.train_function)
+                #debug
 
     def _make_test_function(self):
         if not hasattr(self, 'test_function'):
